@@ -1,11 +1,10 @@
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
 import { browser } from '$app/environment';
-
-const API_BASE_URL = 'http://localhost:8080';
+import { env } from '$env/dynamic/public';
 
 // Create axios instance
 export const api: AxiosInstance = axios.create({
-	baseURL: API_BASE_URL,
+	baseURL: env.PUBLIC_API_BASE_URL,
 	headers: {
 		'Content-Type': 'application/json'
 	}
