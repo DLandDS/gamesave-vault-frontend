@@ -30,7 +30,7 @@ export const load: LayoutLoad = async ({ url }) => {
 	try {
 		// Try to get user profile
 		authStore.setLoading(true);
-		const response = await api.get('/auth/me');
+		const response = await api.get('/admin/profile');
 		authStore.setUser(response.data);
 		authStore.setLoading(false);
 	} catch (error: any) {
@@ -53,7 +53,7 @@ export const load: LayoutLoad = async ({ url }) => {
 					localStorage.setItem('access_token', refreshResponse.data.access_token);
 					
 					// Try to get profile again
-					const profileResponse = await api.get('/auth/me');
+					const profileResponse = await api.get('/admin/profile');
 					authStore.setUser(profileResponse.data);
 				} catch (refreshError) {
 					// Refresh failed, clear tokens and redirect to login

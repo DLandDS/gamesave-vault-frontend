@@ -20,7 +20,7 @@
 
 	async function loadProfile() {
 		try {
-			const response = await api.get('/auth/me');
+			const response = await api.get('/admin/profile');
 			name = response.data.name;
 			email = response.data.email;
 		} catch (error: any) {
@@ -44,7 +44,7 @@
 
 		isUpdatingProfile = true;
 		try {
-			const response = await api.put('/auth/me', { name, email });
+			const response = await api.put('/admin/profile', { name, email });
 			authStore.setUser({ name: response.data.name, email: response.data.email });
 			toast.success('Profile updated successfully!');
 		} catch (error: any) {

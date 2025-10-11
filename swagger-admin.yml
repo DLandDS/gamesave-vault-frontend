@@ -253,7 +253,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /auth/me:
+  /admin/profile:
     get:
       summary: Get admin profile
       description: Get the current admin user's profile
@@ -339,7 +339,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /auth/change-password:
+  /admin/change-password:
     post:
       summary: Change password
       description: Change the current admin user's password
@@ -384,7 +384,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /game:
+  /admin/games:
     post:
       summary: Create a new game
       description: Create a new game with auto-generated token
@@ -447,7 +447,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /game/{id}:
+  /admin/games/{id}:
     get:
       summary: Get game by ID
       description: Get details of a specific game
@@ -587,7 +587,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /game/{id}/saves:
+  /admin/games/{id}/saves:
     get:
       summary: List game saves
       description: Get all save files for a specific game
@@ -631,7 +631,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /game/{id}/reset-token:
+  /admin/games/{id}/reset-token:
     post:
       summary: Reset game token
       description: Regenerate the game's API token (admin only)

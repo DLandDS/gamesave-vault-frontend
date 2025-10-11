@@ -22,7 +22,7 @@
 	async function loadGames() {
 		isLoading = true;
 		try {
-			const response = await api.get('/game');
+			const response = await api.get('/admin/games');
 			games = response.data;
 			filteredGames = games;
 		} catch (error: any) {
@@ -51,7 +51,7 @@
 
 		isCreating = true;
 		try {
-			await api.post('/game', { name: newGameName });
+			await api.post('/admin/games', { name: newGameName });
 			toast.success('Game created successfully!');
 			showCreateModal = false;
 			newGameName = '';
@@ -68,7 +68,7 @@
 		if (!deleteGameId) return;
 
 		try {
-			await api.delete(`/game/${deleteGameId}`);
+			await api.delete(`/admin/games/${deleteGameId}`);
 			toast.success('Game deleted successfully!');
 			deleteGameId = null;
 			await loadGames();

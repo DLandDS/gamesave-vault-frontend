@@ -35,7 +35,7 @@
 			}
 
 			// Get user profile
-			const profileResponse = await api.get('/auth/me');
+			const profileResponse = await api.get('/admin/profile');
 			authStore.setUser(profileResponse.data);
 
 			toast.success('Login successful!');

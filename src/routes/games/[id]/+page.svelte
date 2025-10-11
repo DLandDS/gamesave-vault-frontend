@@ -24,7 +24,7 @@
 
 	async function loadGame() {
 		try {
-			const response = await api.get(`/game/${gameId}`);
+			const response = await api.get(`/admin/games/${gameId}`);
 			game = response.data;
 			if (game) {
 				editedName = game.name;
@@ -40,7 +40,7 @@
 
 	async function loadGameSaves() {
 		try {
-			const response = await api.get(`/game/${gameId}/saves`);
+			const response = await api.get(`/admin/games/${gameId}/saves`);
 			gameSaves = response.data;
 		} catch (error: any) {
 			console.error('Failed to load game saves:', error);
@@ -65,7 +65,7 @@
 
 		isUpdating = true;
 		try {
-			const response = await api.put(`/game/${gameId}`, { name: editedName });
+			const response = await api.put(`/admin/games/${gameId}`, { name: editedName });
 			game = response.data;
 			toast.success('Game updated successfully!');
 			showEditModal = false;
@@ -79,7 +79,7 @@
 
 	async function handleResetToken() {
 		try {
-			const response = await api.post(`/game/${gameId}/reset-token`);
+			const response = await api.post(`/admin/games/${gameId}/reset-token`);
 			game = response.data.game;
 			toast.success('Token reset successfully!');
 			showResetTokenModal = false;

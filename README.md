@@ -101,12 +101,12 @@ The default API base URL is `http://localhost:8080`. To change this, update the 
 - Initial setup wizard for creating the first admin user
 - Only accessible when backend setup is not completed
 
-### `/games`
+### `/admin/games`
 - List all games with search functionality
 - Create new games
 - Quick actions: view details, delete
 
-### `/games/[id]`
+### `/admin/games/[id]`
 - View game details
 - Copy API token to clipboard
 - Reset API token
