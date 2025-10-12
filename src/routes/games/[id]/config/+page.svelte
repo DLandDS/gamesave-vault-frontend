@@ -8,6 +8,7 @@
 
 	let game = $state<Game | null>(null);
 	let isLoading = $state(true);
+	let configTemplate = $state('');
 
 	// Configuration fields
 	let configId = $state('');
@@ -22,8 +23,19 @@
 
 	onMount(async () => {
 		await loadGame();
+		await loadTemplate();
 		generateUUID();
 	});
+
+	async function loadTemplate() {
+		try {
+			const response = await fetch('/config-template.yml');
+			configTemplate = await response.text();
+		} catch (error) {
+			console.error('Failed to load config template:', error);
+			toast.error('Failed to load configuration template');
+		}
+	}
 
 	async function loadGame() {
 		try {
@@ -59,59 +71,42 @@
 	}
 
 	function generateConfig(): string {
-		let config = `# GameSave Vault Client Configuration
-# Place this file in the same directory as the executable
-
-# Game UUID from GameSave Vault API
-id: "${configId}"
-
-# Base URL of the GameSave Vault API
-api-url: "${apiUrl}"
-
-# Authentication token for API access
-api-token: "${apiToken}"
-
-# Full path to game executable
-# Windows example: "C:\\\\Program Files\\\\MyGame\\\\game.exe"
-# Linux example: "/home/user/games/mygame/game.sh"
-# macOS example: "/Applications/MyGame.app/Contents/MacOS/MyGame"
-game-executable-file: "${gameExecutableFile}"
-`;
-
-		if (gameExecutableDir.trim()) {
-			config += `
-# Working directory for game execution (optional)
-# If not specified, defaults to the directory containing the executable
-# Some games require being run from their installation directory
-# Windows example: "C:\\\\Program Files\\\\MyGame"
-# Linux example: "/home/user/games/mygame"
-# macOS example: "/Applications/MyGame.app/Contents/MacOS"
-game-executable-dir: "${gameExecutableDir}"
-`;
+		if (!configTemplate) {
+			return '# Loading template...';
 		}
 
-		config += `
-# Save file location(s)
-`;
+		let config = configTemplate;
 
-		if (gameSaveFiles.length === 1) {
-			config += `# Can be a single path (directory or file):
-game-save-file: "${gameSaveFiles[0]}"
-`;
+		// Replace placeholders
+		config = config.replace('{{ID}}', configId);
+		config = config.replace('{{API_URL}}', apiUrl);
+		config = config.replace('{{API_TOKEN}}', apiToken);
+		config = config.replace('{{GAME_EXECUTABLE_FILE}}', gameExecutableFile);
+
+		// Handle optional game executable dir
+		if (gameExecutableDir.trim()) {
+			config = config.replace('{{GAME_EXECUTABLE_DIR}}', `game-executable-dir: "${gameExecutableDir}"`);
 		} else {
-			config += `# Or multiple paths:
-game-save-file:
-`;
+			config = config.replace('{{GAME_EXECUTABLE_DIR}}', '# game-executable-dir: "/path/to/game/directory"');
+		}
+
+		// Handle save files
+		let saveFilesSection = '';
+		if (gameSaveFiles.length === 1) {
+			saveFilesSection = `# Can be a single path (directory or file):
+game-save-file: "${gameSaveFiles[0]}"`;
+		} else {
+			saveFilesSection = `# Or multiple paths:
+game-save-file:`;
 			gameSaveFiles.forEach((path) => {
-				config += `  - "${path}"
-`;
+				saveFilesSection += `
+  - "${path}"`;
 			});
 		}
+		config = config.replace('{{GAME_SAVE_FILES}}', saveFilesSection);
 
-		config += `
-# Countdown duration in seconds before auto-launching the game
-countdown: ${countdown}
-`;
+		// Replace countdown
+		config = config.replace('{{COUNTDOWN}}', countdown.toString());
 
 		return config;
 	}
