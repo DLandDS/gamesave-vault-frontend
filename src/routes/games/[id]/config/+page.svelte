@@ -5,6 +5,7 @@
 	import api from '$lib/api/client';
 	import { toast } from '$lib/stores/toast';
 	import type { Game } from '$lib/types';
+    import { env } from '$env/dynamic/public';
 
 	let game = $state<Game | null>(null);
 	let isLoading = $state(true);
@@ -12,7 +13,7 @@
 
 	// Configuration fields
 	let configId = $state('');
-	let apiUrl = $state('http://localhost:8080');
+	let apiUrl = $state(env.PUBLIC_API_BASE_URL);
 	let apiToken = $state('');
 	let gameExecutableFile = $state('/path/to/game/executable');
 	let gameExecutableDir = $state('');
