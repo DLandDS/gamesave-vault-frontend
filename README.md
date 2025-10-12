@@ -7,6 +7,7 @@ A modern admin dashboard for GameSave Vault, built with SvelteKit 5, Tailwind CS
 - 🔐 **Authentication**: Secure login, token refresh, and setup wizard
 - 🎮 **Game Management**: Create, read, update, and delete games
 - 📊 **Game Details**: View game information, API tokens, and save file history
+- 🔧 **Client Config Generator**: Generate configuration files (gamesave.yml) for GameSave Vault client
 - ⚙️ **Settings**: Update admin profile and change password
 - 🎨 **Modern UI**: Professional blue theme with responsive design
 - 📱 **Responsive**: Works on desktop and mobile devices
@@ -78,7 +79,7 @@ src/
 
 ## API Configuration
 
-The default API base URL is `http://localhost:8080`. To change this, update the `API_BASE_URL` in `src/lib/api/client.ts`.
+The default API base URL is `http://localhost:3000`. To change this, update the `API_BASE_URL` in `src/lib/api/client.ts`.
 
 ## Authentication Flow
 
@@ -113,6 +114,18 @@ The default API base URL is `http://localhost:8080`. To change this, update the 
 - View game save file history
 - Edit game name
 - Delete game
+- Generate client configuration
+
+### `/admin/games/[id]/config`
+- Client configuration generator for GameSave Vault client
+- Auto-generate unique UUID for client instance
+- Pre-filled API token from game details
+- Configure game executable path and working directory
+- Add multiple save file locations
+- Set launch countdown duration
+- Real-time YAML configuration preview
+- Download configuration as `gamesave.yml`
+- Copy configuration to clipboard
 
 ### `/settings`
 - View and update admin profile (name, email)

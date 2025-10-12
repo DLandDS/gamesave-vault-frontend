@@ -1,0 +1,31 @@
+# GameSave Vault Client Configuration
+# Place this file in the same directory as the executable
+
+# Game UUID from GameSave Vault API
+id: "{{ID}}"
+
+# Base URL of the GameSave Vault API
+api-url: "{{API_URL}}"
+
+# Authentication token for API access
+api-token: "{{API_TOKEN}}"
+
+# Full path to game executable
+# Windows example: "C:\\Program Files\\MyGame\\game.exe"
+# Linux example: "/home/user/games/mygame/game.sh"
+# macOS example: "/Applications/MyGame.app/Contents/MacOS/MyGame"
+game-executable-file: "{{GAME_EXECUTABLE_FILE}}"
+
+# Working directory for game execution (optional)
+# If not specified, defaults to the directory containing the executable
+# Some games require being run from their installation directory
+# Windows example: "C:\\Program Files\\MyGame"
+# Linux example: "/home/user/games/mygame"
+# macOS example: "/Applications/MyGame.app/Contents/MacOS"
+{{GAME_EXECUTABLE_DIR}}
+
+# Save file location(s)
+{{GAME_SAVE_FILES}}
+
+# Countdown duration in seconds before auto-launching the game
+countdown: {{COUNTDOWN}}

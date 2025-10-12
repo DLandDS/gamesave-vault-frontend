@@ -142,12 +142,20 @@
 		<div class="mb-6 rounded-lg bg-white p-6 shadow">
 			<div class="mb-4 flex items-center justify-between">
 				<h2 class="text-xl font-semibold text-gray-800">Game Information</h2>
-				<button
-					onclick={() => (showEditModal = true)}
-					class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
-				>
-					Edit
-				</button>
+				<div class="flex gap-2">
+					<a
+						href="/games/{gameId}/config"
+						class="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+					>
+						Generate Config
+					</a>
+					<button
+						onclick={() => (showEditModal = true)}
+						class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+					>
+						Edit
+					</button>
+				</div>
 			</div>
 
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
