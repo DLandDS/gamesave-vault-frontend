@@ -79,7 +79,7 @@ src/
 
 ## API Configuration
 
-The default API base URL is `http://localhost:8080`. To change this, update the `API_BASE_URL` in `src/lib/api/client.ts`.
+The default API base URL is `http://localhost:3000`. To change this, update the `API_BASE_URL` in `src/lib/api/client.ts`.
 
 ## Authentication Flow
 
