@@ -30,7 +30,7 @@
 
 	async function loadTemplate() {
 		try {
-			const response = await fetch('/config-template.yml');
+			const response = await fetch('/gamesave.example.yml');
 			configTemplate = await response.text();
 		} catch (error) {
 			console.error('Failed to load config template:', error);
